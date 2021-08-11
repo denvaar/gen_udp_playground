@@ -9,7 +9,7 @@ defmodule Playground.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Playground.Worker.start_link(arg)
-      # {Playground.Worker, arg}
+      {Playground.UdpServer, 5051}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
