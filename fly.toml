@@ -1,0 +1,20 @@
+# fly.toml file generated for bold-resonance-6599 on 2021-08-19T18:12:56-06:00
+
+app = "bold-resonance-6599"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[env]
+  port = 5051
+
+[experimental]
+  allowed_public_ports = ["5051"]
+  auto_rollback = true
+
+[[services]]
+  internal_port = 5051
+  protocol = "udp"
+
+  [[services.ports]]
+    port = 5051

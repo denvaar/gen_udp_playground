@@ -19,12 +19,13 @@ defmodule Playground.UdpServer do
     opts = [
       :binary,
       :inet,
-      active: true
+      active: true,
+      ip: get_ip()
     ]
 
     {:ok, _socket} = :gen_udp.open(port, opts)
 
-    Logger.debug("#{__MODULE__} listening on port #{port}.")
+    Logger.debug("Opened socket on #{System.get_env("FLY_GLOBAL_SERVICES_IP")}:#{port}")
 
     {:ok, %{clients: %{}}}
   end
@@ -58,5 +59,12 @@ defmodule Playground.UdpServer do
     address
     |> Tuple.to_list()
     |> Enum.join(".")
+  end
+
+  defp get_ip() do
+    System.get_env("FLY_GLOBAL_SERVICES_IP")
+    |> String.split(".")
+    |> Enum.map(&String.to_integer(&1))
+    |> List.to_tuple()
   end
 end
